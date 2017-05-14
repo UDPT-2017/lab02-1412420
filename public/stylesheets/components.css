@@ -1,0 +1,151 @@
+.btn-standard {
+  background: none;
+  border: none;
+  outline: none; }
+
+.arrow {
+  border-width: 8px;
+  z-index: 10; }
+
+.arrow,
+.arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid; }
+
+.arrow:after {
+  border-width: 7px;
+  content: ""; }
+
+.arrow.top {
+  left: 50%;
+  margin-left: -8px;
+  border-top-width: 0;
+  border-bottom-color: #eee;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  top: -8px; }
+
+.arrow.top:after {
+  content: " ";
+  top: 1px;
+  margin-left: -7px;
+  border-top-width: 0;
+  border-bottom-color: #fff; }
+
+ul.list-messages {
+  margin-left: 30px;
+  margin-right: 10px;
+  border-left: 2px solid #ddd; }
+  ul.list-messages li.message {
+    cursor: pointer;
+    text-align: justify;
+    padding: 25px 15px 15px;
+    display: block;
+    min-height: 45px;
+    border-radius: 3px;
+    margin: 20px 0 20px 40px;
+    background: #fff;
+    position: relative;
+    border-left: 4px solid transparent;
+    font-size: 0.875em; }
+    ul.list-messages li.message:before {
+      width: 10px;
+      height: 10px;
+      border-style: solid;
+      content: " ";
+      position: absolute;
+      left: -14px;
+      top: 19px;
+      border-width: 8px 8px 8px 0;
+      border-color: transparent #fff transparent transparent;
+      display: block; }
+    ul.list-messages li.message .date {
+      position: absolute;
+      left: -69px;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      background: #556b8d;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 1.2em; }
+      ul.list-messages li.message .date span {
+        color: #fff;
+        font-size: 18px;
+        display: block;
+        margin-top: 7px;
+        font-weight: 600; }
+        ul.list-messages li.message .date span.small {
+          color: #fff;
+          font-size: 12px;
+          display: block;
+          margin-top: -2px; }
+    ul.list-messages li.message p.message-title {
+      font-size: 12px;
+      color: #ddd;
+      position: absolute;
+      top: 7px; }
+    ul.list-messages li.message p.message-content {
+      line-height: 20px; }
+
+ul.list-users {
+  margin-left: 30px;
+  margin-right: 10px;
+  border-left: 2px solid #ddd; }
+  ul.list-users li.user {
+    cursor: pointer;
+    text-align: justify;
+    padding: 15px 75px 15px 15px;
+    display: block;
+    min-height: 45px;
+    border-radius: 3px;
+    margin: 20px 0 20px 40px;
+    background: #fff;
+    position: relative;
+    border-left: 4px solid transparent;
+    font-size: 0.875em; }
+    ul.list-users li.user:before {
+      width: 10px;
+      height: 10px;
+      border-style: solid;
+      content: " ";
+      position: absolute;
+      left: -14px;
+      top: 19px;
+      border-width: 8px 8px 8px 0;
+      border-color: transparent #fff transparent transparent;
+      display: block; }
+    ul.list-users li.user .avatar-user {
+      position: absolute;
+      left: -69px;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      background: #556b8d;
+      text-align: center;
+      line-height: 1.2em; }
+      ul.list-users li.user .avatar-user img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%; }
+    ul.list-users li.user .user-content a {
+      color: #333; }
+    ul.list-users li.user .btn-friend {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      border-radius: 0px 3px 3px 0px;
+      width: 70px; }
+      ul.list-users li.user .btn-friend p {
+        color: #fff;
+        font-weight: bold;
+        margin-top: 15px;
+        text-align: center; }
+      ul.list-users li.user .btn-friend.btn-friend-add {
+        background: #5cb85c; }
+      ul.list-users li.user .btn-friend.btn-friend-remove {
+        background: #d9534f; }

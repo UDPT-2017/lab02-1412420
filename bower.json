@@ -1,0 +1,17 @@
+{
+  "name": "lab02-1412420",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Austin <phanphuocdt@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/UDPT-2017/lab02-1412420",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
