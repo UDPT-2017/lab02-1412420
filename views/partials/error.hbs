@@ -1,0 +1,38 @@
+{{#if notice }}
+<div id='m-notice'>
+  <p class="m-notice">{{ notice }}</p>
+  <span class="close-notice">x</span>
+</div>
+
+<script type="text/javascript">
+  var notice = $("#m-notice");
+  $("span.close-notice").click(function(e){
+    notice.hide();
+  });
+  notice.css('display', 'block');
+  setTimeout(function(e){
+    notice.fadeOut();
+  }, 2000);
+</script>
+
+{{/if}}
+
+{{#if alert }}
+<div id='m-notice'>
+  <p class="m-alert">{{ alert }}</p>
+  <span class="close-notice">x</span>
+</div>
+
+<script type="text/javascript">
+  var notice = $("#m-notice");
+  $("span.close-notice").click(function(e){
+    notice.hide();
+  });
+  notice.css('display', 'block');
+  notice.css('display', 'block');
+  setTimeout(function(e){
+    notice.fadeOut();
+  }, 2000);
+</script>
+
+{{/if}}

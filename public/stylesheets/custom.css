@@ -301,10 +301,6 @@ body {
     padding: 10px 25px;
     font-size: 14px;
     margin-top: 5px; }
-  #login-signup .sa-innate-form input[type=submit]:hover {
-    border: 1px solid #db3b2b;
-    background: #db3b2b;
-    color: #fff; }
   #login-signup .sa-innate-form button {
     border: 1px solid #8a6aaf;
     background: #9E7CC1;
@@ -312,10 +308,6 @@ body {
     padding: 10px 25px;
     font-size: 14px;
     margin-top: 5px; }
-  #login-signup .sa-innate-form button:hover {
-    border: 1px solid #db3b2b;
-    background: #db3b2b;
-    color: #fff; }
   #login-signup .sa-innate-form p {
     font-size: 13px;
     padding-top: 10px; }
@@ -335,3 +327,28 @@ body {
 
 #profile #notice-profile {
   display: none; }
+
+#m-notice {
+  border-radius: 2px;
+  height: 55px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
+  display: none; }
+  #m-notice p {
+    text-align: center;
+    line-height: 50px;
+    margin: 0px;
+    color: #a8a8a8; }
+    #m-notice p.m-notice {
+      background: #C1E1F1; }
+    #m-notice p.m-alert {
+      background: #f2dede; }
+  #m-notice span.close-notice {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #a8a8a8; }
