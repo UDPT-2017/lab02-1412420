@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var app = express();
 
 // view engine setup
@@ -14,6 +13,7 @@ var exphbs  = require('express-handlebars');
 var app = express();
 var hbs = exphbs.create({
     helpers: {
+
     },
     defaultLayout: 'application',
     partialsDir: ['views/partials/'],
@@ -28,8 +28,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, 'public'), { redirect : false }));
+app.use('/components', express.static(path.join(__dirname, 'bower_components'), { redirect : false }));
 require('./config/route')(app);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
