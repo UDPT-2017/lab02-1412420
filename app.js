@@ -13,7 +13,17 @@ var exphbs  = require('express-handlebars');
 var app = express();
 var hbs = exphbs.create({
     helpers: {
-
+      getDate: function(date) {
+        var d = new Date();
+        return d.getDate();
+      },
+      getMonth: function(date) {
+        var d = new Date();
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        return monthNames[d.getMonth()];
+      }
     },
     defaultLayout: 'application',
     partialsDir: ['views/partials/'],

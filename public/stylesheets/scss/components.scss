@@ -106,6 +106,9 @@ ul.list-messages {
       line-height: 20px;
     }
   }
+  li.message-unread {
+    background-color: rgba(158, 158, 158, 1);
+  }
 }
 
 ul.list-users {

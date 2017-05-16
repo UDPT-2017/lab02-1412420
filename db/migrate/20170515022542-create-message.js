@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       content: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       friendId: {
         type: Sequelize.INTEGER,

@@ -13,9 +13,12 @@ function configRouting(app) {
     saveUninitialized: true
   }));
 
+
+
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
+
 
   app.use('/session', controllers.session);
   app.use('/user', auth("/session/login"), getAvatar,controllers.user);
