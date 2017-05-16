@@ -1,5 +1,6 @@
 'use strict';
 var bcrypt = require('bcrypt');
+var gravatar = require('gravatar');
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     name: {
@@ -67,6 +68,54 @@ module.exports = function(sequelize, DataTypes) {
         if (bcrypt.compareSync(value, this.password))
           return true;
         return false;
+      },
+      getAllUser: function(fn) {
+        var self = this;
+        var allUser;
+        User.findAll({
+          where: {
+            id: {
+              $ne: self.id
+            }
+          },
+          order: [
+            ['id', 'DESC']
+          ],
+        })
+        .then(function(users) {
+          allUser = users;
+          return self.getRelationships();
+        })
+        .then(function(rels) {
+          var userL = allUser.length;
+          var relL = rels.length;
+          var us = [];
+          var fs = [];
+          var length = allUser[0].id;
+          for(var index = 0 ; index < userL ; index ++) {
+            var ii = allUser[index].id;
+            us[ii] = allUser[index];
+            us[ii].avatar = gravatar.url(us[ii].email);
+            if(rels[index]) {
+              fs[rels[index].friendId] = rels[index];
+            }
+          }
+
+          console.log('___________________________________________');
+          console.log(us);
+          console.log(fs);
+
+          for(var i = 0 ; i <= length ; i++) {
+            if(us[i]) {
+              if(fs[i]) {
+                us[i].isFriend = 1;
+              } else {
+                us[i].isFriend = 0;
+              }
+            }
+          }
+          fn(us);
+        });
       }
     }
   });

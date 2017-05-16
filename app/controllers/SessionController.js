@@ -19,7 +19,6 @@ router.get('/logout' , function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next){
-  console.log(req.body);
   models.User.create({
       name: req.body['name'],
       email: req.body['email'],

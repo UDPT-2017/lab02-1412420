@@ -10,8 +10,7 @@ function configRouting(app) {
   app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    saveUninitialized: true
   }));
 
   app.use(passport.initialize());
@@ -25,10 +24,8 @@ function configRouting(app) {
 
   function getAvatar(req, res, next) {
     req.user.avatar = gravatar.url(req.user.email);
-    console.log(req.user);
     next();
   }
-
 }
 
 module.exports = configRouting;

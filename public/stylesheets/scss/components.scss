@@ -113,7 +113,6 @@ ul.list-users {
   margin-right: 10px;
   border-left: 2px solid $gray-color-1d;
   li.user {
-    cursor: pointer;
     text-align: justify;
     padding: 15px 75px 15px 15px;
     display: block;
@@ -142,7 +141,6 @@ ul.list-users {
       top: 0;
       width: 50px;
       height: 50px;
-      background: #556b8d;
       text-align: center;
       line-height: 1.2em;
       img {
@@ -163,10 +161,12 @@ ul.list-users {
       height: 100%;
       border-radius: 0px 3px 3px 0px;
       width: 70px;
+      outline: none;
+      border: none;
+      @include transition(opacity 0.1s linear);
       p {
         color: $white-color;
         font-weight: bold;
-        margin-top: 15px;
         text-align: center;
       }
       &.btn-friend-add {
@@ -174,6 +174,9 @@ ul.list-users {
       }
       &.btn-friend-remove {
         background: $red-color-1a;
+      }
+      &:hover {
+        opacity: 0.7;
       }
     }
   }
