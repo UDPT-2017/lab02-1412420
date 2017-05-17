@@ -183,11 +183,6 @@ body {
           #main .main-content .center-main-content .tab-content-c .tab-content #r-messages, #main .main-content .center-main-content .tab-content-c .tab-content #s-messages, #main .main-content .center-main-content .tab-content-c .tab-content #users {
             border: 1px solid transparent; }
 
-#send-message-modal #modal-title {
-  float: left;
-  font-weight: bold;
-  color: #9E7CC1; }
-
 #send-message-modal button {
   outline: none; }
 
@@ -200,6 +195,20 @@ body {
 
 #send-message-modal .selectize-dropdown-content span.caption {
   color: #ddd; }
+
+.modal-title {
+  float: left;
+  font-weight: bold;
+  color: #9E7CC1; }
+
+#read-message-modal .note-editable.panel-body {
+  background-color: #fff; }
+
+#read-message-modal .note-toolbar.panel-heading {
+  display: none; }
+
+#read-message-modal form input {
+  background-color: #fff; }
 
 @media screen and (max-width: 768px) {
   body {

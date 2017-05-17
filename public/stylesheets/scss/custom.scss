@@ -264,11 +264,6 @@ body {
 
 // modal
 #send-message-modal {
-  #modal-title {
-    float: left;
-    font-weight: bold;
-    color: $primary-color;
-  }
   button {
     outline: none;
   }
@@ -285,6 +280,26 @@ body {
     }
   }
 }
+.modal-title {
+  float: left;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+#read-message-modal {
+  .note-editable.panel-body {
+    background-color: $white-color;
+  }
+  .note-toolbar.panel-heading {
+    display: none;
+  }
+  form {
+    input {
+      background-color: $white-color;
+    }
+  }
+}
+
 // end modal
 
 // media

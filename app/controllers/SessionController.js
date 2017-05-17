@@ -6,6 +6,33 @@ var passportGoogle = require('../authentication/google');
 var models = require('../models');
 
 router.get('/login' , function(req, res, next) {
+
+  // var user = null;
+  // models.User.findOne({ where: { id: 2 }})
+  //   .then(function(thisUser) {
+  //     user = thisUser;
+  //     return models.User.findOne({ where: { id: 1 } });
+  //   })
+  //   .then(function(anotherUser) {
+  //     user.jsonable().insertMessage('Message 5', anotherUser)
+  //       .then(function(message) {
+  //         console.log("THIS MESSAGE");
+  //         console.log(message);
+  //       });
+  //   });
+
+  // models.User.findOne({ where: { id: 1 }})
+  // .then(function(user) {
+  //   return user.jsonable().updateReadMessage('1495030390500', 2);
+  // })
+  // .then(function(message) {
+  //   console.log(message);
+  // })
+  // .catch(function (error) {
+  //   console.log("ERROR");
+  //   console.log(error);
+  // });
+
   res.render(path.join('user', 'login'), {
     title: 'Login',
     alert: req.flash('alert')[0],

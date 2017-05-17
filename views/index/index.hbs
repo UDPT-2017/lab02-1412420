@@ -37,15 +37,19 @@
         <div id="r-messages" class="tab-pane fade in active">
           <ul class="list-messages">
             {{#each rMessages as |value|}}
-              <li class="message">
+              <li class="message message-receive {{#unless value.read}} message-unread {{/unless}}" data-uid={{ value.uid }} data-user-id={{ value.sUser }} date-user-name="{{ value.sName }}" data-receive-time="{{ value.time }}">
                 <div class="date">
                   <span>{{ getDate value.time }}</span>
                   <span class="small">{{ getMonth value.time }}</span>
                 </div>
                 <p class="message-title">
-                  From {{ value.name }}
+                  From {{ value.sName }}
                   <span class="status">
-                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    {{#if value.read }}
+                      <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+                    {{else}}
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    {{/if}}
                   </span>
                   <time class="timeago" datetime="{{ value.time }}"> {{ value.time }} </time> &bull;
                   <i class="fa fa-globe" aria-hidden="true"></i>
@@ -63,17 +67,25 @@
         <div id="s-messages" class="tab-pane fade">
           <ul class="list-messages">
             {{#each sMessages as |value|}}
-              <li class="message">
+              <li class="message {{#unless value.read}} message-unread {{/unless}}" data-uid={{ value.uid }} data-user-id="{{ value.rUser }}" >
                 <div class="date">
                   <span>13</span>
                   <span class="small">May</span>
                 </div>
                 <p class="message-title">
-                  To {{ value.name }}
+                  To {{ value.rName }}
                   <span class="status">
-                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    {{#if value.read }}
+                      <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+                    {{else}}
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    {{/if}}
                   </span>
                   <time class="timeago" datetime="{{ value.time }}"> {{ value.time }} </time> &bull;
+                  {{#if value.read }}
+                    Seen
+                    <time class="timeago" datetime="{{ value.readTime }}"> {{ value.rTime }} </time> &bull;
+                  {{/if}}
                   <i class="fa fa-globe" aria-hidden="true"></i>
                 </p>
                 <p class="message-content">

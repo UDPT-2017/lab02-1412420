@@ -45,6 +45,42 @@ $(document).ready(function(e) {
   });
   // ============ END BTN ADD FRIEND
 
+  // update read message
 
+  function handleReceiveUnread(e) {
+    var li = $(this);
+    var data = {
+      uid: li.attr('data-uid'),
+      user_id: li.attr('data-user-id')
+    }
+    $.ajax({
+      url: 'messages/update_read',
+      type: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      data: JSON.stringify(data)
+    })
+    .done(function(xhr) {
+      if(xhr.ok) {
+        li.removeClass("message-unread");
+        $("#read-message-modal #send-from").val(xhr.message.sName);
+        $("#read-message-modal #message-from").html(xhr.message.sName);
+        var time = new Date(xhr.message.uid);
+        time = time.toLocaleString();
+        $("#read-message-modal #send-from-time").val(time);
+        $("#read-message-modal .note-editable.panel-body").html(xhr.message.message);
+
+        $("#read-message-modal").modal();
+      }
+    })
+    .fail(function(error) {
+      console.log(error);
+    })
+    .always(function(){
+    });
+  }
+  $(".list-messages").on('click', '.message-receive', handleReceiveUnread);
 
 });

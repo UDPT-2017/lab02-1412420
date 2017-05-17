@@ -11,6 +11,19 @@ toolbar: [
   ]
 });
 
+$('#read-message-text').summernote({
+toolbar: [
+  // [groupName, [list of button]]
+  ['style', ['bold', 'italic', 'underline', 'clear']],
+  ['font', ['strikethrough', 'superscript', 'subscript']],
+  ['fontsize', ['fontsize']],
+  ['color', ['color']],
+  ['para', ['ul', 'ol', 'paragraph']],
+  ['height', ['height']]
+  ]
+});
+$("#read-message-modal .note-editable.panel-body").attr("contenteditable","false");
+
 var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' + '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
 $('#select-to').selectize({

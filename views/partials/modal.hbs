@@ -1,4 +1,4 @@
- {{!-- MODAL --}}
+ {{!-- MODAL MESSAGE--}}
  <div class="modal fade" id="send-message-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -27,5 +27,38 @@
     </div>
   </div>
 </div>
+
+{{!-- END MODAL MESSAGE --}}
+{{!-- MODAL READ MESSAGE --}}
+
+<div class="modal fade" id="read-message-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">Message from <span id="message-from" > </span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="usr">From:</label>
+            <input type="text" class="form-control" id="send-from" disabled="true">
+          </div>
+          <div class="form-group">
+            <label for="usr">Time:</label>
+            <input type="text" class="form-control" id="send-from-time" disabled="true">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="form-control-label">Message:</label>
+            <textarea class="form-control" id="read-message-text" disabled="true"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- MODAL END MESSAGE --}}
 <script type="text/javascript" src="./javascripts/modal.js"></script>
-{{!-- END MODAL --}}

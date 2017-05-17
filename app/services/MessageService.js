@@ -1,15 +1,18 @@
+
 function MessageService(user) {
 
   var safeParse = require("safe-json-parse/tuple");
   var models = require('../models');
   // JSON
-  // user
-  // name
+  // sUser
+  // sName
+  // rUser
+  // rName
   // message
   // time
+  // read
+  // readTime
   // uid -> time in milisecond
-  // read -> 1
-  // readtime
 
   var support = {
     messagesToArray: function(message) {
@@ -101,26 +104,33 @@ function MessageService(user) {
   }
 
   var insertMessage = function (message, anotherUser, cb) {
-    getMessage(anotherUser)
-    .spread(function(thisMessage, created) {
-      var content = safeParse(thisMessage.content)[1];
-      var length = Object.keys(content).length;
-      var buildMessage = {
-        user: user.id,
-        name: user.name,
-        message: message,
-        uid: Date.now(),
-        time: new Date()
-      }
-      content[length + 1] = buildMessage;
-      thisMessage.content = JSON.stringify(content);
-      return thisMessage.save();
-    })
-    .then(function(m) {
-      return cb(m, null);
-    })
-    .catch(function(error) {
-      return cb(null, error);
+    return new Promise(function (resolve, reject) {
+      var messageInsert;
+      getMessage(anotherUser)
+      .spread(function(thisMessage, created) {
+        var content = safeParse(thisMessage.content)[1];
+        var length = Object.keys(content).length;
+        messageInsert = {
+          sUser: user.id,
+          sName: user.name,
+          rUser: anotherUser.id,
+          rName: anotherUser.name,
+          message: message,
+          uid: Date.now(),
+          time: new Date(),
+          read: 0,
+          readTime: 0
+        }
+        content[length + 1] = messageInsert;
+        thisMessage.content = JSON.stringify(content);
+        return thisMessage.save();
+      })
+      .then(function(m) {
+        resolve(messageInsert);
+      })
+      .catch(function(error) {
+        reject(error);
+      });
     });
   }
 
@@ -144,14 +154,14 @@ function MessageService(user) {
     });
   }
 
-  var getAllSendMessages = function(cb) {
+  var getAllSendMessages = function() {
     return new Promise(function(resolve, reject) {
       getAllMessages(function(messages) {
         var length = messages.length;
         var result = [];
         for(var i = 0 ;i < length; i++) {
           var message = messages[i];
-          if(message.user == user.id) {
+          if(message.sUser == user.id) {
             result.push(message);
           }
         }
@@ -160,26 +170,71 @@ function MessageService(user) {
     });
   }
 
-  var getAllReceiveMessages = function(cb) {
+  var getAllReceiveMessages = function() {
     return new Promise(function(resolve, reject) {
       getAllMessages(function(messages) {
         var length = messages.length;
         var result = [];
         for(var i = 0 ;i < length; i++) {
           var message = messages[i];
-          if(message.user != user.id) {
+          if(message.rUser == user.id) {
             result.push(message);
           }
         }
         resolve(support.sortMessages(result));
       });
     });
+  }
+
+  var getMessageByTwoUser = function(anotherUserId) {
+    return models.Message.findOne({
+      where: {
+        $or: [
+          { userId: user.id, friendId: anotherUserId },
+          { userId: anotherUserId, friendId: user.id },
+        ]
+      }
+    });
+  }
+
+  var updateReadMessage = function(uid, anotherUserId) {
+    return new Promise(function(resolve, reject) {
+      var messageFind;
+      getMessageByTwoUser(anotherUserId)
+      .then(function(message) {
+        if(!message) {
+          reject("INTERNAL QUERY ERROR");
+        }
+        var content = safeParse(message.content)[1];
+        var length = Object.keys(content).length;
+        for(var i = 0 ; i < length ; i++) {
+          if(content[i + 1].uid.toString() == uid.toString()){
+            messageFind = content[i + 1];
+            break;
+          }
+        }
+        if(!messageFind) {
+          reject("MESSAGE WITH UID " + uid + " NOT FOUND");
+        } else {
+          if(messageFind.read != 1) {
+            messageFind.read = 1;
+            messageFind.readTime = new Date();
+            message.content = JSON.stringify(content);
+          }
+          return message.save();
+        }
+      })
+      .then(function(updatedMessage) {
+        resolve(messageFind);
+      });
+    })
   }
 
   return {
     insertMessage: insertMessage,
     getAllReceiveMessages: getAllReceiveMessages,
-    getAllSendMessages: getAllSendMessages
+    getAllSendMessages: getAllSendMessages,
+    updateReadMessage: updateReadMessage
   }
 
 }
