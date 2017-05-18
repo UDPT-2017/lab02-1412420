@@ -6,7 +6,7 @@
 <div class="main-content">
   <div class="left-main-content col-md-3">
     <div class="function-use">
-      <button class="btn-standard btn-compose" data-toggle="modal" data-target="#send-message-modal">Compose</button>
+      <button class="btn-standard btn-compose" id="btn-compose-message" data-toggle="modal" data-target="#send-message-modal">Compose</button>
     </div>
   </div>
   <div class="center-main-content col-md-9">
@@ -55,7 +55,7 @@
                   <i class="fa fa-globe" aria-hidden="true"></i>
                 </p>
                 <p class="message-content">
-                  {{ value.message }}
+                  {{{ truncatise value.message }}}
                 </p>
               </li>
             {{/each}}
@@ -89,7 +89,7 @@
                   <i class="fa fa-globe" aria-hidden="true"></i>
                 </p>
                 <p class="message-content">
-                  {{ value.message }}
+                  {{{ truncatise value.message }}}
                 </p>
               </li>
             {{/each}}

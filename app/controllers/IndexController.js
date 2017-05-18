@@ -4,6 +4,7 @@ var path = require('path');
 var models = require('../models');
 /* GET home page. */
 router.get('/' , function(req, res, next) {
+
   var users = [];
   var receiveMessage = [];
   var jsonable = req.user.jsonable();
@@ -27,5 +28,6 @@ router.get('/' , function(req, res, next) {
     });
   });
 });
+
 
 module.exports = router;

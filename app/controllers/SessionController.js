@@ -8,17 +8,16 @@ var models = require('../models');
 router.get('/login' , function(req, res, next) {
 
   // var user = null;
-  // models.User.findOne({ where: { id: 2 }})
+  // models.User.findOne({ where: { id: 1 }})
   //   .then(function(thisUser) {
   //     user = thisUser;
-  //     return models.User.findOne({ where: { id: 1 } });
+  //     return models.User.findOne({ where: { id: 2 } });
   //   })
   //   .then(function(anotherUser) {
-  //     user.jsonable().insertMessage('Message 5', anotherUser)
-  //       .then(function(message) {
-  //         console.log("THIS MESSAGE");
-  //         console.log(message);
-  //       });
+  //     return user.jsonable().insertArrayMessage([1,2], '<div style="color: red;">Message 5</div>');
+  //   })
+  //   .then(function(result) {
+  //     console.log(result);
   //   });
 
   // models.User.findOne({ where: { id: 1 }})
@@ -32,6 +31,8 @@ router.get('/login' , function(req, res, next) {
   //   console.log("ERROR");
   //   console.log(error);
   // });
+
+
 
   res.render(path.join('user', 'login'), {
     title: 'Login',

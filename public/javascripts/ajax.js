@@ -45,7 +45,7 @@ $(document).ready(function(e) {
   });
   // ============ END BTN ADD FRIEND
 
-  // update read message
+  // ============ update read message
 
   function handleReceiveUnread(e) {
     var li = $(this);
@@ -82,5 +82,99 @@ $(document).ready(function(e) {
     });
   }
   $(".list-messages").on('click', '.message-receive', handleReceiveUnread);
+  // ============ end update read message
+  // ============ get all friend
+  $("#btn-compose-message").on('click', function(e) {
+    selectize.clearOptions();
+    $.ajax({
+      url: 'user/get_all_friend',
+      type: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .done(function(xhr){
+      console.log(xhr);
+      if(xhr.ok) {
+        var options = [];
+        var users = JSON.parse(xhr.users);
+        selectize.addOption(users);
+      }
+    })
+    .fail(function(error) {
+      console.log(error);
+    })
+    .always(function(){
+    });
+  });
+  // ============ end get all friend
 
+  // ============ send
+
+  function handleSendMessage(event) {
+    event.preventDefault();
+    var divInput = $(".selectize-input.items.has-items");
+    var divContent = $('.note-editable.panel-body');
+    content = divContent.html().trim();
+    if(divInput.length > 0 && content != "") {
+      var input = divInput[0];
+      var valueUserId = input.getElementsByTagName
+    } else {
+      // handke empty form
+    }
+  }
+
+  $("#btn-send-message-users").on("click", function(e) {
+    e.preventDefault();
+    var input = selectize.getValue();
+    var divContent = $('.note-editable.panel-body');
+    content = divContent.html().trim();
+    var errors = $("#erorrs-modal");
+    if(input != "" && content != "") {
+      var arrInput = input.split(",");
+      var data = {
+        users: arrInput,
+        message: content
+      }
+      $.ajax({
+        url: 'messages/send',
+        type: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify(data)
+      })
+      .done(function(xhr){
+        console.log(xhr);
+        if(xhr.ok) {
+          errors.show();
+          errors.css("color", "#5cb85c");
+          errors.html("Message send successfully");
+          divContent.html("");
+          selectize.clear();
+        } else {
+          errors.show();
+          errors.css("color", "red");
+          errors.html("Error while send message, please reload page or press F5");
+        }
+      })
+      .fail(function(error) {
+        console.log(error);
+      })
+      .always(function(){
+      });
+    } else {
+      errors.show();
+      errors.css("color", "red");
+      errors.html("Please enter two inputs");
+    }
+
+    setTimeout(function(e) {
+      errors.fadeOut();
+    }, 2000);
+  });
+
+  //  ============ end send messages
 });

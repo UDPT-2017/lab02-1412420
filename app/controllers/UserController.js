@@ -35,4 +35,14 @@ router.post('/remove_friend', function(req, res, next) {
   });
 });
 
+router.post('/get_all_friend', function(req, res, next) {
+  req.user.getAllFriend()
+  .then(function(users) {
+    res.send({ok: true, users: JSON.stringify(users), error: null});
+  })
+  .catch(function(error) {
+    res.send({ok: false, users: null, error: error});
+  });
+});
+
 module.exports = router;

@@ -361,3 +361,9 @@ body {
     font-size: 1em;
     cursor: pointer;
     color: #a8a8a8; }
+
+#erorrs-modal {
+  color: red;
+  text-align: left;
+  margin-top: 7px;
+  display: none; }

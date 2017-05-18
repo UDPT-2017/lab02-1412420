@@ -7,8 +7,9 @@ toolbar: [
   ['fontsize', ['fontsize']],
   ['color', ['color']],
   ['para', ['ul', 'ol', 'paragraph']],
-  ['height', ['height']]
-  ]
+  ['height', ['height']],
+  ],
+  placeholder: 'Write here...'
 });
 
 $('#read-message-text').summernote({
@@ -26,16 +27,12 @@ $("#read-message-modal .note-editable.panel-body").attr("contenteditable","false
 
 var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' + '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-$('#select-to').selectize({
+var $select = $('#select-to').selectize({
   persist: false,
   maxItems: null,
-  valueField: 'email',
+  valueField: 'id',
   labelField: 'name',
   searchField: ['name', 'email'],
-  options: [
-  {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
-  {email: 'nikola@tesla.com', name: 'Nikola Tesla'}
-  ],
   render: {
     item: function(item, escape) {
       return '<div>' +
@@ -82,3 +79,5 @@ $('#select-to').selectize({
     return false;
   }
 });
+
+var selectize = $select[0].selectize;

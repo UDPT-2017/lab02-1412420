@@ -124,6 +124,32 @@ module.exports = function(sequelize, DataTypes) {
       },
       jsonable: function() {
         return require('../services/MessageService')(this);
+      },
+      getAllFriend: function() {
+        var self = this;
+        return new Promise(function(resolve, reject) {
+          return self.getRelationships({
+            include: [{
+              model: User,
+              as: 'friend'
+            }]
+          })
+          .then(function(rels) {
+            var l = rels.length;
+            var result = [];
+            for(var i = 0 ; i < l ; i++) {
+              result.push({
+                id: rels[i].friend.id,
+                name: rels[i].friend.name,
+                email: rels[i].friend.email
+              });
+            }
+            resolve(result);
+          })
+          .catch(function(error) {
+            reject(error);
+          });
+        });
       }
     }
   });

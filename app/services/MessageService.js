@@ -103,7 +103,7 @@ function MessageService(user) {
     });
   }
 
-  var insertMessage = function (message, anotherUser, cb) {
+  var insertMessage = function (message, anotherUser) {
     return new Promise(function (resolve, reject) {
       var messageInsert;
       getMessage(anotherUser)
@@ -129,6 +129,33 @@ function MessageService(user) {
         resolve(messageInsert);
       })
       .catch(function(error) {
+        reject(error);
+      });
+    });
+  }
+
+  var insertArrayMessage = function(arrUsers, message) {
+    return new Promise(function(resolve, reject) {
+      models.User.findAll({
+        where: {
+          id: {
+            $in: arrUsers
+          }
+        }
+      })
+      .then(function(users) {
+        var l = users.length;
+        var result = [];
+        for(var i = 0 ; i < l ; i++) {
+          result.push({
+            message: message,
+            userId: users[i].id
+          });
+          insertMessage(message, users[i]);
+        }
+        resolve(result);
+      }).
+      catch(function(error) {
         reject(error);
       });
     });
@@ -234,9 +261,9 @@ function MessageService(user) {
     insertMessage: insertMessage,
     getAllReceiveMessages: getAllReceiveMessages,
     getAllSendMessages: getAllSendMessages,
-    updateReadMessage: updateReadMessage
+    updateReadMessage: updateReadMessage,
+    insertArrayMessage: insertArrayMessage
   }
-
 }
 
 module.exports = MessageService;

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var truncatise = require('truncatise');
 var app = express();
 
 // view engine setup
@@ -11,6 +12,8 @@ var exphbs  = require('express-handlebars');
 
 // config view engine
 var app = express();
+
+
 var hbs = exphbs.create({
     helpers: {
       getDate: function(date) {
@@ -23,6 +26,16 @@ var hbs = exphbs.create({
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         return monthNames[d.getMonth()];
+      },
+      truncatise: function(html) {
+        var options = {
+          TruncateLength: 50,
+          TruncateBy : "words",
+          Strict : true,
+          StripHTML : false,
+          Suffix : ' ...'
+        };
+        return truncatise(html, options);
       }
     },
     defaultLayout: 'application',
