@@ -195,10 +195,15 @@ body {
       padding: 6px 0px 6px 0px;
       .btn-reload {
         margin-left: 15px;
-        padding: 6px 30px;
+        width: 100px;
+        height: 40px;
         color: $gray-color-1g;
         background-color: $gray-color-1a;
         border-radius: 4px;
+        img {
+          width: 22px;
+          height: 22px;
+        }
       }
     }
   }
@@ -264,11 +269,6 @@ body {
 
 // modal
 #send-message-modal {
-  #modal-title {
-    float: left;
-    font-weight: bold;
-    color: $primary-color;
-  }
   button {
     outline: none;
   }
@@ -285,6 +285,26 @@ body {
     }
   }
 }
+.modal-title {
+  float: left;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+#read-message-modal {
+  .note-editable.panel-body {
+    background-color: $white-color;
+  }
+  .note-toolbar.panel-heading {
+    display: none;
+  }
+  form {
+    input {
+      background-color: $white-color;
+    }
+  }
+}
+
 // end modal
 
 // media
@@ -326,6 +346,9 @@ body {
         }
       }
     }
+  }
+  .hidden-res {
+    display: none;
   }
 }
 
@@ -498,4 +521,11 @@ body {
     cursor: pointer;
     color: #a8a8a8;
   }
+}
+
+#erorrs-modal {
+  color: red;
+  text-align: left;
+  margin-top: 7px;
+  display: none;
 }

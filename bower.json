@@ -13,5 +13,18 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery-timeago": "^1.5.4",
+    "selectize": "^0.12.4",
+    "bootstrap": "boostrap#^3.3.7",
+    "jquery": "^3.2.1",
+    "sifter": "^0.5.2",
+    "summernote": "^0.8.3",
+    "microplugin": "^0.0.3",
+    "jquery-truncate-html": "^0.0.1"
+  },
+  "resolutions": {
+    "jquery": "^3.2.1"
+  }
 }

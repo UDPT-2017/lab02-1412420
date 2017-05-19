@@ -142,10 +142,14 @@ body {
       padding: 6px 0px 6px 0px; }
       #main .sub-menu #selection-tools .btn-reload {
         margin-left: 15px;
-        padding: 6px 30px;
+        width: 100px;
+        height: 40px;
         color: #777;
         background-color: #EDF1F2;
         border-radius: 4px; }
+        #main .sub-menu #selection-tools .btn-reload img {
+          width: 22px;
+          height: 22px; }
   #main .main-content {
     overflow: hidden;
     border: 1px solid blue; }
@@ -183,11 +187,6 @@ body {
           #main .main-content .center-main-content .tab-content-c .tab-content #r-messages, #main .main-content .center-main-content .tab-content-c .tab-content #s-messages, #main .main-content .center-main-content .tab-content-c .tab-content #users {
             border: 1px solid transparent; }
 
-#send-message-modal #modal-title {
-  float: left;
-  font-weight: bold;
-  color: #9E7CC1; }
-
 #send-message-modal button {
   outline: none; }
 
@@ -200,6 +199,20 @@ body {
 
 #send-message-modal .selectize-dropdown-content span.caption {
   color: #ddd; }
+
+.modal-title {
+  float: left;
+  font-weight: bold;
+  color: #9E7CC1; }
+
+#read-message-modal .note-editable.panel-body {
+  background-color: #fff; }
+
+#read-message-modal .note-toolbar.panel-heading {
+  display: none; }
+
+#read-message-modal form input {
+  background-color: #fff; }
 
 @media screen and (max-width: 768px) {
   body {
@@ -229,7 +242,9 @@ body {
         margin: 0px auto; }
       #header .h-container .personal-info .options-opt .avatar-info {
         margin-top: 10px;
-        width: 90%; } }
+        width: 90%; }
+  .hidden-res {
+    display: none; } }
 
 #login-signup {
   margin-top: 50px; }
@@ -352,3 +367,9 @@ body {
     font-size: 1em;
     cursor: pointer;
     color: #a8a8a8; }
+
+#erorrs-modal {
+  color: red;
+  text-align: left;
+  margin-top: 7px;
+  display: none; }

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var truncatise = require('truncatise');
 var app = express();
 
 // view engine setup
@@ -11,9 +12,35 @@ var exphbs  = require('express-handlebars');
 
 // config view engine
 var app = express();
+
+
 var hbs = exphbs.create({
     helpers: {
-
+      getDate: function(date) {
+        var d = new Date(date);
+        return d.getDate();
+      },
+      getMonth: function(date) {
+        var d = new Date(date);
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        return monthNames[d.getMonth()];
+      },
+      getStandardTime: function(date) {
+        var d = new Date(date);
+        return d.getHours() + 'h:' + d.getMinutes() + "m";
+      },
+      truncatise: function(html) {
+        var options = {
+          TruncateLength: 50,
+          TruncateBy : "words",
+          Strict : true,
+          StripHTML : true,
+          Suffix : ' ...'
+        };
+        return truncatise(html, options);
+      }
     },
     defaultLayout: 'application',
     partialsDir: ['views/partials/'],
@@ -48,5 +75,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

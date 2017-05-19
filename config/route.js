@@ -17,6 +17,7 @@ function configRouting(app) {
   app.use(passport.session());
   app.use(flash());
 
+
   app.use('/session', controllers.session);
   app.use('/user', auth("/session/login"), getAvatar,controllers.user);
   app.use('/messages', auth("/session/login"), getAvatar, controllers.messages);
