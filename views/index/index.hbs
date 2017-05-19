@@ -1,6 +1,6 @@
 <div class="sub-menu">
   <div class="col-md-offset-3 col-sm-offset-3" id="selection-tools">
-    <button class="btn-standard btn-reload"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+    <button class="btn-standard btn-reload" id="btn-sync"><i class="fa fa-refresh" aria-hidden="true"></i></button>
   </div>
 </div>
 <div class="main-content">
@@ -16,26 +16,26 @@
         <li class="active">
           <a data-toggle="tab" href="#r-messages">
             <i class="fa fa-envelope-open" aria-hidden="true"></i>
-            Received Messages
+            <span class="hidden-res">Received Messages</span>
           </a>
         </li>
         <li>
           <a data-toggle="tab" href="#s-messages">
             <i class="fa fa-envelope" aria-hidden="true"></i>
-            Sent Messages
+            <span class="hidden-res">Sent Messages</span>
           </a>
         </li>
         <li>
           <a data-toggle="tab" href="#users">
             <i class="fa fa-users" aria-hidden="true"></i>
-            Users
+            <span class="hidden-res">Users</span>
           </a>
         </li>
       </ul>
 
       <div class="tab-content" id="tab-selection-content">
         <div id="r-messages" class="tab-pane fade in active">
-          <ul class="list-messages">
+          <ul class="list-messages" id="list-r-messages">
             {{#each rMessages as |value|}}
               <li class="message message-receive {{#unless value.read}} message-unread {{/unless}}" data-uid={{ value.uid }} data-user-id={{ value.sUser }} date-user-name="{{ value.sName }}" data-receive-time="{{ value.time }}">
                 <div class="date">
@@ -44,7 +44,7 @@
                 </div>
                 <p class="message-title">
                   From {{ value.sName }}
-                  <span class="status">
+                  <span class="status" id="r-status-{{ value.uid }}">
                     {{#if value.read }}
                       <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
                     {{else}}
@@ -67,7 +67,7 @@
         <div id="s-messages" class="tab-pane fade">
           <ul class="list-messages">
             {{#each sMessages as |value|}}
-              <li class="message {{#unless value.read}} message-unread {{/unless}}" data-uid={{ value.uid }} data-user-id="{{ value.rUser }}" >
+              <li class="message message-send {{#unless value.read}} message-unread {{/unless}}" data-uid={{ value.uid }} data-user-id="{{ value.rUser }}" >
                 <div class="date">
                   <span>13</span>
                   <span class="small">May</span>
@@ -81,7 +81,7 @@
                       <i class="fa fa-envelope-o" aria-hidden="true"></i>
                     {{/if}}
                   </span>
-                  <time class="timeago" datetime="{{ value.time }}"> {{ value.time }} </time> &bull;
+                  <time datetime="{{ value.time }}"> {{ getStandardTime value.time }} </time> &bull;
                   {{#if value.read }}
                     Seen
                     <time class="timeago" datetime="{{ value.readTime }}"> {{ value.rTime }} </time> &bull;
@@ -134,6 +134,7 @@
 <script type="text/javascript" src="../components/summernote/dist/summernote.js"></script>
 <script type="text/javascript" src="../components/selectize/dist/js/standalone/selectize.js"></script>
 <script type="text/javascript" src="../components/jquery-timeago/jquery.timeago.js" type="text/javascript"></script>
+<script type="text/javascript" src="../components/jquery-truncate-html/jquery.truncate.js" type="text/javascript"></script>
 
 <script type="text/javascript">
    $(document).ready(function() {

@@ -17,22 +17,26 @@ var app = express();
 var hbs = exphbs.create({
     helpers: {
       getDate: function(date) {
-        var d = new Date();
+        var d = new Date(date);
         return d.getDate();
       },
       getMonth: function(date) {
-        var d = new Date();
+        var d = new Date(date);
         var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
         ];
         return monthNames[d.getMonth()];
+      },
+      getStandardTime: function(date) {
+        var d = new Date(date);
+        return d.getHours() + 'h:' + d.getMinutes() + "m";
       },
       truncatise: function(html) {
         var options = {
           TruncateLength: 50,
           TruncateBy : "words",
           Strict : true,
-          StripHTML : false,
+          StripHTML : true,
           Suffix : ' ...'
         };
         return truncatise(html, options);

@@ -85,13 +85,13 @@ ul.list-messages {
           margin-top: -2px; }
     ul.list-messages li.message p.message-title {
       font-size: 12px;
-      color: #ddd;
+      color: #999;
       position: absolute;
       top: 7px; }
     ul.list-messages li.message p.message-content {
       line-height: 20px; }
   ul.list-messages li.message-unread {
-    background-color: #9e9e9e; }
+    background-color: #ddd; }
 
 ul.list-users {
   margin-left: 30px;

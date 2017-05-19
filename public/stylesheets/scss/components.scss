@@ -98,7 +98,7 @@ ul.list-messages {
     }
     p.message-title {
       font-size: 12px;
-      color: $gray-color-1d;
+      color: $gray-color-1h;
       position: absolute;
       top: 7px;
     }
@@ -107,7 +107,7 @@ ul.list-messages {
     }
   }
   li.message-unread {
-    background-color: rgba(158, 158, 158, 1);
+    background-color: $gray-color-1d;
   }
 }
 

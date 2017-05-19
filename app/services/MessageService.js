@@ -257,12 +257,38 @@ function MessageService(user) {
     })
   }
 
+  var getSendMessage = function(uid, anotherUserId) {
+    return new Promise(function(resolve, reject) {
+      var messageFind;
+      getMessageByTwoUser(anotherUserId)
+      .then(function(message) {
+        if(!message) {
+          reject("INTERNAL QUERY ERROR");
+        }
+        var content = safeParse(message.content)[1];
+        var length = Object.keys(content).length;
+        for(var i = 0 ; i < length ; i++) {
+          if(content[i + 1].uid.toString() == uid.toString()){
+            messageFind = content[i + 1];
+            break;
+          }
+        }
+        if(!messageFind) {
+          reject("MESSAGE WITH UID " + uid + " NOT FOUND");
+        } else {
+          resolve(messageFind);
+        }
+      });
+    })
+  }
+
   return {
     insertMessage: insertMessage,
     getAllReceiveMessages: getAllReceiveMessages,
     getAllSendMessages: getAllSendMessages,
     updateReadMessage: updateReadMessage,
-    insertArrayMessage: insertArrayMessage
+    insertArrayMessage: insertArrayMessage,
+    getSendMessage: getSendMessage
   }
 }
 

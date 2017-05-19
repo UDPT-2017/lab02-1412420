@@ -195,10 +195,15 @@ body {
       padding: 6px 0px 6px 0px;
       .btn-reload {
         margin-left: 15px;
-        padding: 6px 30px;
+        width: 100px;
+        height: 40px;
         color: $gray-color-1g;
         background-color: $gray-color-1a;
         border-radius: 4px;
+        img {
+          width: 22px;
+          height: 22px;
+        }
       }
     }
   }
@@ -341,6 +346,9 @@ body {
         }
       }
     }
+  }
+  .hidden-res {
+    display: none;
   }
 }
 

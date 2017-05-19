@@ -65,6 +65,8 @@ $(document).ready(function(e) {
     .done(function(xhr) {
       if(xhr.ok) {
         li.removeClass("message-unread");
+        $("#label-message-modal").html("From");
+        $("#r-status-" + xhr.message.uid).html('<i class="fa fa-envelope-open-o" aria-hidden="true"></i>');
         $("#read-message-modal #send-from").val(xhr.message.sName);
         $("#read-message-modal #message-from").html(xhr.message.sName);
         var time = new Date(xhr.message.uid);
@@ -77,12 +79,48 @@ $(document).ready(function(e) {
     })
     .fail(function(error) {
       console.log(error);
-    })
-    .always(function(){
     });
   }
   $(".list-messages").on('click', '.message-receive', handleReceiveUnread);
   // ============ end update read message
+
+  // send message
+
+  $(".list-messages").on('click', '.message-send', function(e) {
+    var li = $(this);
+    var data = {
+      uid: li.attr('data-uid'),
+      user_id: li.attr('data-user-id')
+    }
+    $.ajax({
+      url: 'messages/get_send_message',
+      type: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      data: JSON.stringify(data)
+    })
+    .done(function(xhr) {
+      if(xhr.ok) {
+        $("#label-message-modal").html("To");
+        $("#read-message-modal #send-from").val(xhr.message.rName);
+        $("#read-message-modal #message-from").html(xhr.message.rName);
+        var time = new Date(xhr.message.uid);
+        time = time.toLocaleString();
+        $("#read-message-modal #send-from-time").val(time);
+        $("#read-message-modal .note-editable.panel-body").html(xhr.message.message);
+
+        $("#read-message-modal").modal();
+      }
+    })
+    .fail(function(error) {
+      console.log(error);
+    });
+  });
+
+  // end send message
+
   // ============ get all friend
   $("#btn-compose-message").on('click', function(e) {
     selectize.clearOptions();
@@ -111,19 +149,6 @@ $(document).ready(function(e) {
   // ============ end get all friend
 
   // ============ send
-
-  function handleSendMessage(event) {
-    event.preventDefault();
-    var divInput = $(".selectize-input.items.has-items");
-    var divContent = $('.note-editable.panel-body');
-    content = divContent.html().trim();
-    if(divInput.length > 0 && content != "") {
-      var input = divInput[0];
-      var valueUserId = input.getElementsByTagName
-    } else {
-      // handke empty form
-    }
-  }
 
   $("#btn-send-message-users").on("click", function(e) {
     e.preventDefault();
@@ -162,8 +187,6 @@ $(document).ready(function(e) {
       })
       .fail(function(error) {
         console.log(error);
-      })
-      .always(function(){
       });
     } else {
       errors.show();
@@ -177,4 +200,62 @@ $(document).ready(function(e) {
   });
 
   //  ============ end send messages
+
+  // sync message
+  $("#btn-sync").click(function(e) {
+    var btn = $(this);
+    btn.html('<img src="images/load.gif">');
+    $.ajax({
+      url: 'messages/get_all_receive_message',
+      type: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .done(function(xhr){
+      console.log(xhr);
+      if(xhr.ok) {
+        var messages = xhr.messages;
+        var l = messages.length;
+        var ul = $("#list-r-messages");
+        ul.html("");
+        for(var i = 0 ; i < l ; i++) {
+          ul.append(createLi(messages[i]));
+        }
+      }
+    })
+    .fail(function(error) {
+      console.log(error);
+    })
+    .always(function(){
+      btn.html('<i class="fa fa-refresh" aria-hidden="true"></i>');
+    });
+  });
+
+  function createLi(message) {
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    var unread = message.read == 0 ? 'message-unread' : '';
+    var date = new Date(message.time);
+    var d = date.getDate();
+    var m = monthNames[date.getMonth()];
+    var readDate = new Date(message.uid);
+    var timeAgo = jQuery.timeago(message.uid);
+    var content = jQuery.truncate(message.message, {
+      length: 300,
+      stripTags: true
+    });
+    var li = $(`<li class="message message-receive ${unread}" data-uid="${message.uid}" data-user-id="${message.sUser}" data-user-name="${message.sName}" data-receive-time="${readDate}"></li>`);
+    var div = (`<div class="date"><span>${d}</span><span class="small">${m}</span></div>`);
+    var pTitle = $(`<p class="message-title">From ${message.sName}&nbsp;<span class="status" id="r-status-${message.uid}"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>&nbsp;<time class="timeago" datetime="${readDate}" title="${readDate}">${timeAgo} </time>&bull;&nbsp;<i class="fa fa-globe" aria-hidden="true"></i></p>`)
+    var pContent = $(`<p class="message-content">${content}</p>`)
+    li.append(div);
+    li.append(pTitle);
+    li.append(pContent);
+    return li;
+  }
+
+  // end sync message
 });

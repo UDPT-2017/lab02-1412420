@@ -21,6 +21,10 @@
     "jquery": "^3.2.1",
     "sifter": "^0.5.2",
     "summernote": "^0.8.3",
-    "microplugin": "^0.0.3"
+    "microplugin": "^0.0.3",
+    "jquery-truncate-html": "^0.0.1"
+  },
+  "resolutions": {
+    "jquery": "^3.2.1"
   }
 }

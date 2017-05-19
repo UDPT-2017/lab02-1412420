@@ -30,7 +30,7 @@ Yêu cầu **bắt buộc**
 * [x] Trang about thể hiện thông tin nhóm thực hiện đề tài.
 * [x] Nhấn nút "new message" sẽ chuyển sang giao diện cho phép người dùng gửi tin nhắn cho người dùng trong danh sách bạn bè. Người gửi phải nằm trong danh sách bạn bè và cho phép người dùng chọn qua combobox.
 * [x] Nhấn "sent" sẽ chuyển sang giao diện hiển thị danh sách tin nhắn đã gửi. Mỗi tin nhắn cần hiện thời gian người nhận đã đọc.
-* [ ] Nhấn "refresh" để cập nhật danh sách tin nhắn mới nhất (ko nạp lại dữ liệu trên trang).
+* [x] Nhấn "refresh" để cập nhật danh sách tin nhắn mới nhất (ko nạp lại dữ liệu trên trang).
 * [x] Cho phép người dùng layout tin nhắn bằng markdown.
 
 Yêu cầu **không bắt buộc**:
