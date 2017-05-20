@@ -152,7 +152,7 @@ body {
           height: 22px; }
   #main .main-content {
     overflow: hidden;
-    border: 1px solid blue; }
+    border-top: 1px solid #ddd; }
     #main .main-content .left-main-content {
       background-color: #fff;
       border-right: 1px solid #EDF1F2; }

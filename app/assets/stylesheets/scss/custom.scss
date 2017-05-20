@@ -209,7 +209,7 @@ body {
   }
   .main-content {
     overflow: hidden;
-    border: 1px solid blue;
+    border-top: 1px solid $gray-color-1d;
     .left-main-content {
       background-color: $white-color;
       border-right: 1px solid $gray-color-1a;

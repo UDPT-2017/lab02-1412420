@@ -68,7 +68,7 @@ $(document).ready(function(e) {
         $("#label-message-modal").html("From");
         $("#r-status-" + xhr.message.uid).html('<i class="fa fa-envelope-open-o" aria-hidden="true"></i>');
         $("#read-message-modal #send-from").val(xhr.message.sName);
-        $("#read-message-modal #message-from").html(xhr.message.sName);
+        $("#read-message-modal #message-from").html('from ' + xhr.message.sName);
         var time = new Date(xhr.message.uid);
         time = time.toLocaleString();
         $("#read-message-modal #send-from-time").val(time);
@@ -105,7 +105,7 @@ $(document).ready(function(e) {
       if(xhr.ok) {
         $("#label-message-modal").html("To");
         $("#read-message-modal #send-from").val(xhr.message.rName);
-        $("#read-message-modal #message-from").html(xhr.message.rName);
+        $("#read-message-modal #message-from").html('to ' + xhr.message.rName);
         var time = new Date(xhr.message.uid);
         time = time.toLocaleString();
         $("#read-message-modal #send-from-time").val(time);

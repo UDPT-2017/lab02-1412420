@@ -162,7 +162,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.beforeCreate(function(user, options, fn) {
-    bcrypt.hash(user.get('password'), 3, function(err, hash) {
+    bcrypt.hash(user.get('password'), 10, function(err, hash) {
       if (err) return fn(err);
       user.set('password', hash);
       return fn(null, user);
@@ -171,7 +171,7 @@ module.exports = function(sequelize, DataTypes) {
 
   User.beforeCreate(function(user, options, fn) {
     if(user.get('googleId')) {
-      bcrypt.hash(user.get('googleId'), 10, function(err, hash) {
+      bcrypt.hash(user.get('googleId'), 5, function(err, hash) {
         if (err) return fn(err);
         user.set('googleId', hash);
         return fn(null, user);
@@ -182,8 +182,12 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.beforeUpdate(function(user, options, fn) {
+    var preGgId = user.previous('googleId');
+    if(preGgId == user.googleId) {
+      return fn(null, user);
+    }
     if(user.get('googleId')) {
-      bcrypt.hash(user.get('googleId'), 10, function(err, hash) {
+      bcrypt.hash(user.get('googleId'), 5, function(err, hash) {
         if (err) return fn(err);
         user.set('googleId', hash);
         return fn(null, user);
@@ -194,7 +198,12 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.beforeUpdate(function(user, options, fn) {
-    bcrypt.hash(user.get('password'), 3, function(err, hash) {
+    var prePass = user.previous('password');
+    if(prePass == user.password) {
+      return fn(null, user);
+    }
+
+    bcrypt.hash(user.get('password'), 10, function(err, hash) {
       if (err) return fn(err);
       user.set('password', hash);
       return fn(null, user);

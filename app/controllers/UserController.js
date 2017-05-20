@@ -10,6 +10,21 @@ router.get('/' , function(req, res, next) {
   });
 });
 
+router.post('/update' , function(req, res, next) {
+  var password = req.body.password;
+  var name = req.body.name;
+  req.user.update({
+    name: name,
+    password: password
+  })
+  .then(function(thisUser) {
+    res.redirect('/user');
+  })
+  .catch(function(error) {
+    res.redirect('/user');
+  });
+});
+
 router.post('/add_friend', function(req, res, next) {
   models.Relationship.create(req.body)
   .then(function (rel) {
