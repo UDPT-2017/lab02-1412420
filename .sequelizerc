@@ -1,5 +1,5 @@
 var path = require('path')
-
+require('dotenv').config();
 module.exports = {
   'migrations-path' : path.resolve('db', 'migrate'),
   'models-path'     : path.resolve('app', 'models'),

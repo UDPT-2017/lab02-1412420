@@ -1,19 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "123",
-    "database": "lab02_development",
-    "host": "127.0.0.1",
-    "port": 5432,
-    "dialect": "postgres"
+    "use_env_variable": "DATABASE_URL"
   },
   "test": {
-    "username": "postgres",
-    "password": "123",
-    "database": "lab02_test",
-    "host": "127.0.0.1",
-    "port": 5432,
-    "dialect": "postgres"
+    "use_env_variable": "DATABASE_URL"
   },
   "production": {
     "use_env_variable": "DATABASE_URL"
