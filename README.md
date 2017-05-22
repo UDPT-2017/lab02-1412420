@@ -1,12 +1,11 @@
-# BT-UDPT-2 - *Name of your app*
+# BT-UDPT-2 - *lab02-1412420*
 
 **Name of your app** là một bài tập 2 tại môn UDPT. Ứng dụng cho phép người dùng gửi tin nhắn (email) cho người dùng khác.
 
 Thành viên:
-* [ ] **MSSV1** Tên sinh viên 1 (tên tài khoản github)
-* [ ] **MSSV2** Tên sinh viên 2 (tên tài khoản github)
+* [x] **1412420** Phan Hữu Phước ([Huuphuoc19](https://github.com/Huuphuoc19))
 
-URL: **URL hosting của bài tập**
+URL: **[HEROKU](https://udpt-lab02.herokuapp.com/)**
 
 ## Yêu cầu
 
@@ -52,7 +51,7 @@ Liệt kê các **yêu cầu nâng cao** đã thực hiện:
 
 Link ảnh GIF demo ứng dụng:
 
-![Video Walkthrough](demo.gif)
+![demo](demo.gif)
 
 Tạo ảnh GIF với chương trình [LiceCap](http://www.cockos.com/licecap/).
 
